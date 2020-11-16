@@ -65,6 +65,3 @@ def gen_xy(text, mode="center"):
     elif mode == "right":
         return ((DIMEN-X_MAR, Y_MAR), "r")
 
-
-# text_to_pic("سیاوش بزرگ ترین اشتباه زندگی من بود",
-#     "Kimia")
