@@ -1,0 +1,58 @@
+from os import environ
+from time import sleep
+
+from src.txt_to_pic import source_pic, text_to_pic, pa
+
+
+from pyrogram import Client, filters
+
+app = Client("rightel_account",
+    api_id=int(environ["API_ID"]),
+    api_hash=environ["API_HASH"])
+
+
+@app.on_message(filters.command("pic") & filters.user("me"))
+async def make_pic(client, message):
+    reply_mes = message.reply_to_message
+
+    command = message.text.split(maxsplit=2)[1:]
+
+    name = reply_mes.from_user.first_name
+    name += f" {reply_mes.from_user.last_name}" if reply_mes.from_user.last_name else ""
+
+    name = command[1] if len(command) == 2 else name
+    align = command[0] if len(command) >= 1 else "center"
+
+    text_to_pic(reply_mes.text, name, align=align)
+    await reply_mes.reply_photo(source_pic / "sticker.png")
+    await client.send_document("me", source_pic / "sticker.png")
+
+
+@app.on_message(filters.command("sticker") & filters.user("me"))
+async def make_sticker(client, message):
+    reply_mes = message.reply_to_message
+
+    command = message.text.split(maxsplit=2)[1:]
+
+    name = reply_mes.from_user.first_name
+    name += f" {reply_mes.from_user.last_name}" if reply_mes.from_user.last_name else ""
+    name = command[1] if len(command) == 2 else name
+    align = command[0] if len(command) >= 1 else "center"
+
+    text_to_pic(reply_mes.text, name, align=align)
+    await reply_mes.reply_sticker(source_pic / "sticker.webp")
+
+
+
+@app.on_message(filters.command("addsticker") & filters.user("me"))
+async def add_to_sticker(client, message):
+    command = command = message.text.split()[1:]
+    await client.send_message("@Stickers", "/addsticker")
+    await client.send_message("@Stickers", command[0])
+    await client.send_document("@Stickers", source_pic / "sticker.png")
+    await client.send_message("@Stickers", "👾")
+    await client.send_message("@Stickers", "/done")
+    await message.reply_text("Done.")
+
+
+app.run()
