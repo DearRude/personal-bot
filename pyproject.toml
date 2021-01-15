@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.8"
 pyrogram = "^1.0.7"
 tgcrypto = "^1.2.2"
-pillow = "^3.9"
+Pillow = "^8.1.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.6.0"

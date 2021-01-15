@@ -4,8 +4,6 @@ SHELL=/bin/bash
 pyver = "3.8.0"
 
 include .env
-export $(grep -v '^#' .env | xargs)
-
 
 installpoet:
 	@echo --- INSTALLING ---

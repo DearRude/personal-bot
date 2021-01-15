@@ -22,7 +22,7 @@
   </a>
 
   <h3 align="center">Personal Bot</h3>
-
+    <img src="https://travis-ci.com/DearRude/personal-bot.svg?branch=master" align="center">
   <p align="center">
     A Telegram bot to automate things in Python
     <br />
@@ -46,6 +46,8 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+    - [Source](#source)
+    - [Docker](#docker)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -84,6 +86,8 @@ pip install poetry --user
 
 ### Installation
 
+#### Source
+
 1. Clone the repo
 ```sh
 git clone https://github.com/DearRude/personal-bot.git
@@ -93,6 +97,15 @@ git clone https://github.com/DearRude/personal-bot.git
 poetry install
 ```
 
+#### Docker
+1. Clone the repo
+```sh
+git clone https://github.com/DearRude/personal-bot.git
+```
+2. Run with docker-compose
+```sh
+docker-compose up
+```
 
 
 <!-- USAGE EXAMPLES -->
