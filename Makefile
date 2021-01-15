@@ -2,6 +2,7 @@
 
 SHELL=/bin/bash
 pyver = "3.8.0"
+PYTHONPATH=.
 
 include .env
 

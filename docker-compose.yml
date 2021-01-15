@@ -1,0 +1,5 @@
+version: '3.7'
+services:
+  bot:
+    image: dearrude/personal-bot:latest
+    env_file: .env

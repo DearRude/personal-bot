@@ -11,6 +11,8 @@ LABEL maintainer = "dearrude@tfwno.gf"
 
 # Install dependency
 RUN pip install poetry
+RUN apt update
+RUN apt install -y libraqm-dev
 RUN poetry install --no-dev
 
 # Run scheduled

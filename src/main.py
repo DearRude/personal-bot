@@ -2,14 +2,12 @@ from os import environ
 from time import sleep
 
 from src.txt_to_pic import source_pic, text_to_pic, pa
-
-
 from pyrogram import Client, filters
 
-app = Client("rightel_account",
+
+app = Client(environ["TG_STORE"],
     api_id=int(environ["API_ID"]),
     api_hash=environ["API_HASH"])
-
 
 @app.on_message(filters.command("pic") & filters.user("me"))
 async def make_pic(client, message):
@@ -27,7 +25,6 @@ async def make_pic(client, message):
     await reply_mes.reply_photo(source_pic / "sticker.png")
     await client.send_document("me", source_pic / "sticker.png")
 
-
 @app.on_message(filters.command("sticker") & filters.user("me"))
 async def make_sticker(client, message):
     reply_mes = message.reply_to_message
@@ -41,8 +38,6 @@ async def make_sticker(client, message):
 
     text_to_pic(reply_mes.text, name, align=align)
     await reply_mes.reply_sticker(source_pic / "sticker.webp")
-
-
 
 @app.on_message(filters.command("addsticker") & filters.user("me"))
 async def add_to_sticker(client, message):
