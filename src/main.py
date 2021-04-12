@@ -41,7 +41,7 @@ async def make_sticker(client, message):
 
 @app.on_message(filters.command("addsticker") & filters.user("me"))
 async def add_to_sticker(client, message):
-    command = command = message.text.split()[1:]
+    command = message.text.split()[1:]
     await client.send_message("@Stickers", "/addsticker")
     await client.send_message("@Stickers", command[0])
     await client.send_document("@Stickers", source_pic / "sticker.png")
@@ -49,5 +49,17 @@ async def add_to_sticker(client, message):
     await client.send_message("@Stickers", "/done")
     await message.reply_text("Done.")
 
+
+@app.on_message(filters.command("clear") & filters.user("me"))
+async def delete_messages(client, message):
+    mes_id, deletion_count = message.message_id, 0
+    command = message.text.split()[1:]
+    message_iteration = client.iter_history(message.chat.id,
+        limit=int(command[0]), offset=1)
+    async for mess in message_iteration:
+        deleted = await mess.delete()
+        if deleted:
+            deletion_count += 1
+    await message.reply_text(f"{deletion_count} messages deleted.")
 
 app.run()

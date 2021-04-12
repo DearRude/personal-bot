@@ -55,7 +55,7 @@ def gen_xy(text, mode="center"):
     X_MAR = 70
 
     lines = text.count("\n")
-    Y_MAR -= lines * 7
+    Y_MAR -= lines * 2
 
     center = DIMEN / 2
     if mode == "center":
