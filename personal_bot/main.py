@@ -1,13 +1,14 @@
-from os import environ
 from time import sleep
 
-from src.txt_to_pic import source_pic, text_to_pic, pa
+import toml
+from personal_bot.txt_to_pic import source_pic, text_to_pic, pa
 from pyrogram import Client, filters
 
+confs = toml.load("conf.toml")
 
-app = Client(environ["TG_STORE"],
-    api_id=int(environ["API_ID"]),
-    api_hash=environ["API_HASH"])
+app = Client(confs["pyrogram"]["session_store"],
+             api_id=confs["pyrogram"]["api_id"],
+             api_hash=confs["pyrogram"]["api_hash"])
 
 @app.on_message(filters.command("pic") & filters.user("me"))
 async def make_pic(client, message):

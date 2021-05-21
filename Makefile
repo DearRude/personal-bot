@@ -2,7 +2,6 @@
 
 SHELL=/bin/bash
 pyver = "3.8.0"
-PYTHONPATH=.
 
 include .env
 
@@ -18,7 +17,7 @@ install:
 
 run:
 	@echo --- RUNNING BOT ---
-	@poetry run python src/main.py
+	@poetry run python personal_bot/main.py
 
 req:
 	@pip freeze > requirements.txt
