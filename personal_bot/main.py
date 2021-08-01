@@ -1,10 +1,12 @@
 from time import sleep
+from os import environ
 
 import toml
 from personal_bot.txt_to_pic import source_pic, text_to_pic, pa
 from pyrogram import Client, filters
 
-confs = toml.load("conf.toml")
+dir_conf = environ.get("PB_CONF_DIR", ".")
+confs = toml.load(f"{dir_conf}/conf.toml")
 
 app = Client(confs["pyrogram"]["session_store"],
              api_id=confs["pyrogram"]["api_id"],

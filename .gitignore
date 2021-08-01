@@ -12,6 +12,7 @@ __pycache__/
 
 # Env file
 .env
+.direnv
 
 # Pyrogram
 *.session
