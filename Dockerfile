@@ -21,4 +21,4 @@ RUN poetry install --no-dev
 
 
 # Run scheduled
-CMD [ "poetry", "run", "python3", "./peronal-bot/main.py" ]
+CMD [ "poetry", "run", "python3", "peronal-bot/main.py" ]
