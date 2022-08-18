@@ -172,6 +172,7 @@ cython_debug/
 .direnv
 .envrc
 .zsh.local
+shell.nix
 
 # Pyrogram
 *.session

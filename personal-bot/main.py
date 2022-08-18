@@ -41,17 +41,18 @@ async def make_uuid(client, message):
 
 @app.on_message(filters.command("merge") & filters.user("me"))
 async def merge_messages(client, message):
-    mes_id, deletion_count = message.message_id, 0
     command = message.text.split()[1:]
-    message_iteration = client.iter_history(
-        message.chat.id, limit=int(command[0]), offset=1
-    )
     merged_text = list()
-    async for mess in message_iteration:
+    for offset in range(1, 10):
+        mess = [
+            m async for m in client.get_chat_history(message.chat.id, limit=1, offset=1)
+        ][0]
+        if mess.from_user.id != message.from_user.id:
+            break
         merged_text.append(mess.text)
-        deleted = await mess.delete()
+        await mess.delete()
     await message.delete()
-    await message.reply_text("\n".join(merged_text[::-1]), quote=True)
+    await message.reply_text("\n".join(merged_text[::-1]))
 
 
 @app.on_message(filters.command("sticker") & filters.user("me"))
@@ -102,7 +103,7 @@ async def schedule_message(client, message):
 async def delete_messages(client, message):
     mes_id, deletion_count = message.message_id, 0
     command = message.text.split()[1:]
-    message_iteration = client.iter_history(
+    message_iteration = client.get_chat_history(
         message.chat.id, limit=int(command[0]), offset=1
     )
     async for mess in message_iteration:
