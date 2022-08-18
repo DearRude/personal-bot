@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  bot:
+    container_name: personal-bot
+    # image: dearrude/personal-bot:latest
+    build: .
+    env_file: .env
+    volumes:
+      - ./personal-bot:/usr/src/personal-bot/personal-bot

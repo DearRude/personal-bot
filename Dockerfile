@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-buster
 
 # Select workdir
 WORKDIR /usr/src/personal-bot
@@ -14,9 +14,11 @@ COPY poetry.lock .
 
 # Labels
 LABEL maintainer = "dearrude@tfwno.gf"
+
+# Install
+COPY . .
 RUN poetry install --no-dev
 
-COPY . .
 
 # Run scheduled
-CMD [ "poetry", "run", "python3", "./src/main.py" ]
+CMD [ "poetry", "run", "python3", "./peronal-bot/main.py" ]
