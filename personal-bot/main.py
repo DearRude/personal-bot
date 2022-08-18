@@ -8,9 +8,7 @@ from pyrogram import Client, filters
 
 
 scheduler = AsyncIOScheduler()
-app = Client(
-    environ["TG_STORE"], api_id=int(environ["API_ID"]), api_hash=environ["API_HASH"]
-)
+app = Client("personal-bot", session_string=environ["TG_STORE"])
 
 
 @app.on_message(filters.command("pic") & filters.user("me"))
@@ -88,7 +86,7 @@ async def send_schedule_message(client, message, text):
 
 @app.on_message(filters.command("schedule") & filters.user("me"))
 async def schedule_message(client, message):
-    command = ' '.join(message.text.split()[1:])
+    command = " ".join(message.text.split()[1:])
     if message.reply_to_message is not None:
         scheduler.add_job(
             send_schedule_message,
