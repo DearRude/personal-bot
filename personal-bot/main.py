@@ -1,5 +1,6 @@
 from os import environ
 from asyncio import sleep
+from zoneinfo import ZoneInfo
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -7,7 +8,7 @@ from txt_to_pic import source_pic, text_to_pic, pa
 from pyrogram import Client, filters
 
 
-scheduler = AsyncIOScheduler()
+scheduler = AsyncIOScheduler(timezone=ZoneInfo(environ.get("TIMEZONE", "Asia/Tehran")))
 app = Client("personal-bot", session_string=environ["TG_STORE"])
 
 
