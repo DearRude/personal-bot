@@ -1,0 +1,48 @@
+#+TITLE: personal-bot
+
+[[https://github.com/DearRude/personal-bot/actions/workflows/docker.yml/badge.svg]]
+[[https://img.shields.io/github/license/dearrude/personal-bot.svg]]
+[[https://img.shields.io/github/last-commit/dearrude/personal-bot.svg]]
+
+** Description
+Perosnal-bot is a Telegram user emulation in order to do repetitive tasks.
+By pyrogram, telegram-bot is able to register as a Telegram client.
+
+** Setup
+*** From source
+Have ~python 3.10~ and ~poetry~ installed on your system.
+
+Make a config file and fill the specified units.
+#+BEGIN_SRC sh
+$ cp .env.sample .env
+$ $EDITOR .env
+#+END_SRC
+
+Install and run using poetry.
+#+BEGIN_SRC sh
+$ poetry install --no-dev
+$ poetry run python3 personal-bot/main.py
+#+END_SRC
+
+*** Docker
+Have ~docker~ and ~docker-compose~ installed on your system.
+
+Make a config file and fill the specified units.
+#+BEGIN_SRC sh
+$ cp .env.sample .env
+$ $EDITOR .env
+#+END_SRC
+
+**** Development
+#+BEGIN_SRC sh
+$ docker-compose -f docker-compose.dev.yml run --rm bot bash
+#+END_SRC
+**** Production
+Checkout the respective tag on dockerhub.
+#+BEGIN_SRC sh
+$ docker-compose up -d
+#+END_SRC
+
+
+** Licence
+AGPLv3+
