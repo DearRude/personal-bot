@@ -168,5 +168,10 @@ cython_debug/
 # VSCODE and Python linter specefic
 .vscode/**
 
+# Direnv
+.direnv
+.envrc
+.zsh.local
+
 # Pyrogram
 *.session
