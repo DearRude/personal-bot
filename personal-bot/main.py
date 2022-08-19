@@ -1,6 +1,5 @@
 from os import environ
 from asyncio import sleep
-from zoneinfo import ZoneInfo
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -8,7 +7,8 @@ from txt_to_pic import source_pic, text_to_pic, pa
 from pyrogram import Client, filters
 
 
-scheduler = AsyncIOScheduler(timezone=ZoneInfo(environ.get("TIMEZONE", "Asia/Tehran")))
+tz = environ.get("TIMEZONE", "Asia/Tehran")
+scheduler = AsyncIOScheduler(timezone=tz)
 app = Client("personal-bot", session_string=environ["TG_STORE"])
 
 
@@ -89,11 +89,11 @@ async def send_schedule_message(client, message, chat_id):
 @app.on_message(filters.command("mkcron") & filters.user("me"))
 async def schedule_message(client, message):
     job_name = message.text.split()[1]
-    command = " ".join(message.text.split()[2:])
+    trigger = CronTrigger.from_crontab(" ".join(message.text.split()[2:]), timezone=tz)
     if message.reply_to_message is not None:
         scheduler.add_job(
             send_schedule_message,
-            CronTrigger.from_crontab(command),
+            trigger,
             args=[client, message.reply_to_message, message.chat.id],
             id=job_name,
         )
