@@ -82,8 +82,8 @@ async def add_to_sticker(client, message):
     await message.reply_text("Done.")
 
 
-async def send_schedule_message(client, message, chat_id):
-    await message.copy(chat_id)
+async def send_schedule_message(client, message_id, chat_id):
+    await client.copy_message(chat_id, chat_id, message_id)
 
 
 @app.on_message(filters.command("mkcron") & filters.user("me"))
@@ -94,7 +94,7 @@ async def schedule_message(client, message):
         scheduler.add_job(
             send_schedule_message,
             trigger,
-            args=[client, message.reply_to_message, message.chat.id],
+            args=[client, message.reply_to_message.id, message.chat.id],
             id=job_name,
         )
         await message.reply_text(f"Job `{job_name}` is scheduled.")
