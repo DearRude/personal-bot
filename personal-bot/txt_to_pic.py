@@ -10,7 +10,7 @@ source_pic = pa.cwd() / "assets" / "exports"
 
 
 def text_to_pic(
-    text, writer, font=emoji_font, font_size=30, pic=base_pic, align="center"
+    text, writer, font=def_font, font_size=30, pic=base_pic, align="center"
 ):
     text_font = ImageFont.truetype(str(font), size=font_size, encoding="unic")
     writer_font = ImageFont.truetype(str(font), size=15, encoding="unic")
